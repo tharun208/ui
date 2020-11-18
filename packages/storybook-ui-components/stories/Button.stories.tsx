@@ -33,9 +33,16 @@ const Link: FunctionComponent<{ children: ReactNode }> = props => (
 
 export const Example = () => (
   <StoryContainer>
-    <h1>Buttons</h1>
-    <section>
-      <h3>Type</h3>
+    <p>
+      {" "}
+      Buttons allow users to perform an action or to navigate to another page.
+      They have multiple styles for various needs, and are ideal for calling
+      attention to where a user needs to do something in order to move forward
+      in a flow.{" "}
+    </p>
+
+    <h1>Type</h1>
+    <section style={{ maxWidth: "700px" }}>
       <ButtonDisplaySection>
         <ButtonDisplay>
           <Label>primary</Label>
@@ -45,20 +52,44 @@ export const Example = () => (
           <Label>success</Label>
           <Button intent="success">Success</Button>
         </ButtonDisplay>
+      </ButtonDisplaySection>
+      <br></br>
+      <br></br>
+      <ButtonDisplaySection>
         <ButtonDisplay>
           <Label>danger</Label>
           <Button intent="danger">Danger</Button>
         </ButtonDisplay>
+      </ButtonDisplaySection>
+      <br></br>
+      <br></br>
+      <ButtonDisplaySection>
         <ButtonDisplay>
-          <Label>secondary (default)</Label>
           <Button>Secondary</Button>
+          <p
+            style={{ textAlign: "left", lineHeight: "24px", fontSize: "16px" }}
+          >
+            Use for actions that complement a primary action, or when there are
+            multiple actions of equal weight.{" "}
+          </p>
         </ButtonDisplay>
+      </ButtonDisplaySection>
+      <br></br>
+      <br></br>
+      <ButtonDisplaySection>
         <ButtonDisplay>
-          <Label>tertiary</Label>
           <Button intent="tertiary">Tertiary</Button>
+          <p
+            style={{ textAlign: "left", lineHeight: "24px", fontSize: "16px" }}
+          >
+            Use as an alternative to the secondary button for complementary
+            actions. They can be used inline because they are different from
+            content in style and recognizable as buttons alongside content.{" "}
+          </p>
         </ButtonDisplay>
       </ButtonDisplaySection>
     </section>
+
     <section>
       <h3>Size</h3>
       <ButtonDisplaySection>
