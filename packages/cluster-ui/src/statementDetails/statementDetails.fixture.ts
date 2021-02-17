@@ -109,21 +109,25 @@ export const getStatementDetailsPropsFixture = (): StatementDetailsProps => ({
       {
         label: "4",
         implicitTxn: true,
+        fullScan: true,
         stats: statementStats,
       },
       {
         label: "3",
         implicitTxn: true,
+        fullScan: true,
         stats: statementStats,
       },
       {
         label: "2",
         implicitTxn: true,
+        fullScan: true,
         stats: statementStats,
       },
       {
         label: "1",
         implicitTxn: true,
+        fullScan: true,
         stats: statementStats,
       },
     ],

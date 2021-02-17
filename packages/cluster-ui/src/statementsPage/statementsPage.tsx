@@ -31,6 +31,7 @@ import { cockroach } from "@cockroachlabs/crdb-protobuf-client";
 
 type IStatementDiagnosticsReport = cockroach.server.serverpb.IStatementDiagnosticsReport;
 import sortableTableStyles from "src/sortedtable/sortedtable.module.scss";
+import { CheckboxInput } from "../../../ui-components/src";
 
 const cx = classNames.bind(styles);
 const sortableTableCx = classNames.bind(sortableTableStyles);
@@ -71,6 +72,7 @@ export interface StatementsPageState {
   sortSetting: SortSetting;
   search?: string;
   pagination: ISortedTablePagination;
+  fullScan: boolean;
 }
 
 export type StatementsPageProps = StatementsPageDispatchProps &
@@ -96,6 +98,7 @@ export class StatementsPage extends React.Component<
         current: 1,
       },
       search: "",
+      fullScan: false,
     };
 
     const stateFromHistory = this.getStateFromHistory();
@@ -213,13 +216,19 @@ export class StatementsPage extends React.Component<
   filteredStatementsData = () => {
     const { search } = this.state;
     const { statements } = this.props;
-    return statements.filter(statement =>
-      search
-        .split(" ")
-        .every(val =>
-          statement.label.toLowerCase().includes(val.toLowerCase()),
-        ),
-    );
+    return statements
+      .filter(statement => (this.state.fullScan ? statement.fullScan : true))
+      .filter(statement =>
+        search
+          .split(" ")
+          .every(val =>
+            statement.label.toLowerCase().includes(val.toLowerCase()),
+          ),
+      );
+  };
+
+  fullScanChange = () => {
+    this.setState({ fullScan: !this.state.fullScan });
   };
 
   renderLastCleared = () => {
@@ -263,6 +272,15 @@ export class StatementsPage extends React.Component<
                 {`App: ${decodeURIComponent(currentOption.name)}`}
               </Text>
             </Dropdown>
+          </PageConfigItem>
+          <PageConfigItem>
+            <input
+              type="checkbox"
+              id="full-table-scan-toggle"
+              defaultChecked={this.state.fullScan}
+              onChange={this.fullScanChange}
+            />
+            Only show statements that contain queries with full table scans
           </PageConfigItem>
         </PageConfig>
         <section className={sortableTableCx("cl-table-container")}>
